@@ -41,6 +41,12 @@ jobs:
       run: |
           echo "🟢 The value of VERSION is $VERSION"
 
+    - name: Install dependencies
+      run: |
+        echo "Installing necessary dependencies..."
+        python -m pip install --upgrade pip
+        pip install build
+
     - name: Build package
       run: |
         echo "Building the Python package..."
