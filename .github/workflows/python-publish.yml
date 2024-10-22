@@ -61,7 +61,7 @@ jobs:
       uses: actions/create-release@v1
       with:
         tag_name: ${{ env.VERSION }}  # Используем переменную VERSION как тег
-        release_name: "Release ${{ env.VERSION }}"  # Название релиза
+        release_name: "${{ env.VERSION }}"  # Название релиза
         draft: false
         prerelease: false
       env:
