@@ -60,8 +60,8 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ steps.get_version.outputs.tag }}  # Используем дату и время как тег
-        release_name: "Release ${{ steps.get_version.outputs.tag }}"  # Название релиза
+        tag_name: $VERSION  # Используем дату и время как тег
+        release_name: "Release $VERSION"  # Название релиза
         draft: false
         prerelease: false
       env:
