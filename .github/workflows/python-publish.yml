@@ -41,16 +41,13 @@ jobs:
       run: |
           echo "🟠 The value of VERSION is $VERSION"
 
-    - name: 🟣 List of files
+    - name: 🟣 Sed
       run: |
-          ls -lha
-          
           sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
     - name: 🟡 Cat
       run: |
           cat pyproject.toml
-          sleep 7
 
 
     - name: Install dependencies
