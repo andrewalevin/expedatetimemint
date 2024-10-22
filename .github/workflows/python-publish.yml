@@ -27,6 +27,15 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install 🦅 VersionHawk
+      run: |
+        echo "Install 🦅 VersionHawk..."
+        python -m pip install --upgrade pip
+        pip install versionhawk
+        versionhawk expedatetimemint
+        echo "🟢 Version"
+
+
     - name: Install dependencies
       run: |
         echo "Installing necessary dependencies..."
