@@ -1,14 +1,14 @@
-name: Upload Python Package
+name: Upload and Release Python Package
 
 on:
   push:
     branches:
-      - main  # Укажите нужную ветку, например, main или другую, если требуется
+      - main  # Укажите нужную ветку для создания релиза и загрузки на PyPi
   release:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -40,7 +40,20 @@ jobs:
         echo "Building the Python package..."
         python -m build
 
+    - name: Create GitHub Release
+      id: create_release
+      run: echo "Creating a new release on GitHub..."
+    - uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.sha }}  # Использует хэш коммита как тег
+        release_name: "Release ${{ github.sha }}"  # Название релиза
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Publish package
+      if: steps.create_release.outputs.upload_url != ''
       run: echo "Publishing the package to PyPi..."
     - uses: pypa/gh-action-pypi-publish@v1.8.6
       with:
