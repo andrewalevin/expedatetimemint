@@ -34,12 +34,16 @@ jobs:
         pip install versionhawk
         echo "Version <-"
         
-    - name: 🟢🟢 Get 🦅 VersionHawk
+    - name: 🔵 Get 🦅 VersionHawk
       run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
 
-    - name: 🟢🟢🟢 Check 🦅 VersionHawk
+    - name: 🟠 Check 🦅 VersionHawk
       run: |
-          echo "🟢 The value of VERSION is $VERSION"
+          echo "🟠 The value of VERSION is $VERSION"
+
+    - name: 🟣 List of files
+      run: |
+          ls -lha
 
     - name: Install dependencies
       run: |
