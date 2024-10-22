@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "expedatetimemint"
-version = "0.3"
+version = "0.4"
 description = "🥭 A simple CLI tool to display the current date and time with a random fruit or vegetable emoji."
 readme = "README.md"
 requires-python = ">=3.6"
