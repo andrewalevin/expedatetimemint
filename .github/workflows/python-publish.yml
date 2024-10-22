@@ -27,7 +27,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install 🦅 VersionHawk
+    - name: 🟢 Install 🦅 VersionHawk
       run: |
         echo "Install 🦅 VersionHawk..."
         python -m pip install --upgrade pip
@@ -35,8 +35,11 @@ jobs:
         echo "Version <-"
         
     - name: 🟢🟢 Get 🦅 VersionHawk
-      id: get_version
-      run: echo "::set-output name=tag::v$(versionhawk expedatetimemint)"
+      run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+
+    - name: 🟢🟢🟢 Check 🦅 VersionHawk
+      run: |
+          echo "🟢 The value of VERSION is $VERSION"
 
     - name: Build package
       run: |
