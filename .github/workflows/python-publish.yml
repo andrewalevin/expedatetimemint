@@ -32,15 +32,11 @@ jobs:
         echo "Install 🦅 VersionHawk..."
         python -m pip install --upgrade pip
         pip install versionhawk
-        versionhawk expedatetimemint
-        echo "🟢 Version"
-
-
-    - name: Install dependencies
-      run: |
-        echo "Installing necessary dependencies..."
-        python -m pip install --upgrade pip
-        pip install build
+        echo "Version <-"
+        
+    - name: 🟢🟢 Get 🦅 VersionHawk
+      id: get_version
+      run: echo "::set-output name=tag::v$(versionhawk expedatetimemint)"
 
     - name: Build package
       run: |
@@ -55,8 +51,8 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ steps.get_datetime.outputs.tag }}  # Используем дату и время как тег
-        release_name: "Release ${{ steps.get_datetime.outputs.tag }}"  # Название релиза
+        tag_name: ${{ steps.get_version.outputs.tag }}  # Используем дату и время как тег
+        release_name: "Release ${{ steps.get_version.outputs.tag }}"  # Название релиза
         draft: false
         prerelease: false
       env:
