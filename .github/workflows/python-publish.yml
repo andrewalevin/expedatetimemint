@@ -45,7 +45,7 @@ jobs:
       run: |
           ls -lha
           
-          sed -i 's/PROJECT_VERSION/$VERSION' pyproject.toml
+          sed -i "s/PROJECT_VERSION/${VERSION}" pyproject.toml
 
     - name: 🟡 Cat
       run: |
