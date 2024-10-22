@@ -40,13 +40,16 @@ jobs:
         echo "Building the Python package..."
         python -m build
 
+    - name: Get current date and time
+      id: get_datetime
+      run: echo "::set-output name=tag::v$(date +'%Y%m%d-%H%M%S')"
+
     - name: Create GitHub Release
       id: create_release
-      run: echo "Creating a new release on GitHub..."
-    - uses: actions/create-release@v1
+      uses: actions/create-release@v1
       with:
-        tag_name: ${{ github.sha }}  # Использует хэш коммита как тег
-        release_name: "Release ${{ github.sha }}"  # Название релиза
+        tag_name: ${{ steps.get_datetime.outputs.tag }}  # Используем дату и время как тег
+        release_name: "Release ${{ steps.get_datetime.outputs.tag }}"  # Название релиза
         draft: false
         prerelease: false
       env:
@@ -54,8 +57,8 @@ jobs:
 
     - name: Publish package
       if: steps.create_release.outputs.upload_url != ''
-      run: echo "Publishing the package to PyPi..."
-    - uses: pypa/gh-action-pypi-publish@v1.8.6
+      uses: pypa/gh-action-pypi-publish@v1.8.6
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+      run: echo "Publishing the package to PyPi..."
