@@ -43,7 +43,13 @@ jobs:
 
     - name: 🟣 List of files
       run: |
-          ls -lha
+          sed -i '' "s/^PROJECT_VERSION = .*/PROJECT_VERSION = \"$VERSION\"/" pyproject.toml
+
+    - name: 🟡 Cat
+      run: |
+          cat pyproject.toml
+          sleep 7
+
 
     - name: Install dependencies
       run: |
