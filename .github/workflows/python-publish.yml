@@ -18,10 +18,10 @@ jobs:
       DOCKERHUB_USERNAME: andrewlevin
       PROJECT_NAME: expedatetimemint
     steps:
-    - name: 🍊 Checkout repository
+    - name: 🍊 😺 Checkout repository
       uses: actions/checkout@v4
 
-    - name: 🍋 Set up Python environment
+    - name: 🥝 😺 Set up Python environment
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
@@ -39,14 +39,9 @@ jobs:
       run: |
         echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
       
-    - name: 🐍 🔫 🔢  Sed Version to PROJECT.TOML
+    - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
         sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
-
-    - name: DEV 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
-      run: |
-        echo "🔫 Version 🔫 : ${{ env.VERSION }}"
-        cat pyproject.toml
 
     - name: 🐍 ⬇️ Python. Install dependencies
       run: pip install build
@@ -91,9 +86,6 @@ jobs:
         platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
             
         
-
-
-
 
 
 
