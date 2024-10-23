@@ -22,7 +22,7 @@ jobs:
       PYPI_PROJECT_NAME: expedatetimemint
       PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
       DOCKERHUB_USERNAME: andrewlevin
-      DOCKERHUB_PROJECT_NAME: expedatetimemint
+      DOCKERHUB_REPO_NAME: expedatetimemint
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       
     steps:
@@ -87,11 +87,16 @@ jobs:
       with:
         push: true
         tags: |
-            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_PROJECT_NAME }}:${{ env.VERSION }}
-            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_PROJECT_NAME }}:latest
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO_NAME }}:${{ env.VERSION }}
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO_NAME }}:latest
         platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
-            
-        
+    
+    - name: ✅ Success! View of results.
+      run: |
+        echo "🐍 PyPI. Release history: https://pypi.org/project/${PYPI_PROJECT_NAME}/#history"
+        echo ""
+        echo "🐳 Docker Hub. Tags: https://hub.docker.com/r/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO_NAME}/tags"
+        echo ""
 
 
 
