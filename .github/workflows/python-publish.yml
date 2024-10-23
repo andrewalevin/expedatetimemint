@@ -43,17 +43,13 @@ jobs:
     #- name: 🕰️ 🔢 Version DateTimeStamp
     #  run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
         
-    - name: 🦅 🔫 🔢  Sed Version to PROJECT.TOML
+    - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
-        VERSION2=$(versionhawk https://github.com/andrewalevin/expedatetimemint/)
-        echo "🔢 Version2=$VERSION2"
-        echo "🔢 Version2=${VERSION2}"
-        sed -i "s/PROJECT_VERSION/${VERSION2}/g" pyproject.toml
-
-    - name: 🦅 🔫🔫🔫🔫 🔢  Sed Version to PROJECT.TOML
+        echo "VERSION=$(versionhawk ${PYPI_PROJECT_NAME})" >> $GITHUB_ENV
+      
+    - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
-        echo "🔢 Version2=$VERSION2"
-        echo "🔢 Version2=${VERSION2}"
+        sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
     - name: 🐍 ⬇️ Python. Install dependencies
       run: pip install build
