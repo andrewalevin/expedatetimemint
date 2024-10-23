@@ -20,10 +20,13 @@ classifiers = [
 ]
 
 [project.scripts]
-expedatetimemint = "expedatetimemint.main:main"
+expedatetimemint = "expedatetimemint.expedatetimemint:main"
 
 [project.optional-dependencies]
 dev = ["pytest", "flake8"]
 
 [tool.setuptools.package-data]
 expedatetimemint = ["py.typed"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

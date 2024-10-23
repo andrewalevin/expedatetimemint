@@ -17,7 +17,6 @@ emojis = [
 package_name = "expedatetimemint"
 
 
-
 def show_time_with_emoji():
     try:
         pkg_version = version(package_name)
