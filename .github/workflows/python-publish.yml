@@ -15,8 +15,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      DOCKERHUB_USERNAME: andrewlevin
       PROJECT_NAME: expedatetimemint
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      DOCKERHUB_USERNAME: andrewlevin
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      
     steps:
     - name: 🍊 😺 Checkout repository
       uses: actions/checkout@v4
@@ -57,21 +61,19 @@ jobs:
         release_name: ${{ env.VERSION }}
         draft: false
         prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 🐍 💾 🚀 Python PyPI. Publish package
       if: steps.create_release.outputs.upload_url != ''
       uses: pypa/gh-action-pypi-publish@v1.8.6
       with:
         user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        password: ${{ env.PYPI_API_TOKEN }}
   
     - name: 🐳 🔑 Docker. Login to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        password: ${{ env.DOCKERHUB_TOKEN }}
 
     - name: 🐳 🏗️ Docker. Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
