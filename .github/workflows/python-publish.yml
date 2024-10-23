@@ -37,7 +37,7 @@ jobs:
         echo "Version <-"
         
     - name: 🔵 Get 🦅 VersionHawk
-      run: echo "VERSION=$(versionhawk ${{ vars.PROJECT_NAME }})" >> $GITHUB_ENV
+      run: echo "VERSION=$(versionhawk ${vars.PROJECT_NAME})" >> $GITHUB_ENV
 
     - name: 🟠 Check 🦅 VersionHawk
       run: |
