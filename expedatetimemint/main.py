@@ -17,6 +17,7 @@ emojis = [
 package_name = "expedatetimemint"
 
 
+
 def show_time_with_emoji():
     try:
         pkg_version = version(package_name)
@@ -33,7 +34,6 @@ def show_time_with_emoji():
 def main():
     logging.info('🚀 Started main(): ')
     show_time_with_emoji()
-
 
 
 if __name__ == "__main__":
