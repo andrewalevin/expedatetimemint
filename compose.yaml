@@ -1,6 +1,8 @@
 
 services:
   expedatetimemint:
+    environment:
+      - PYTHONUNBUFFERED=1
     image: andrewlevin/expedatetimemint:latest
     restart: on-failure:3
 
