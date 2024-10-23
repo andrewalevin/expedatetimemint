@@ -45,9 +45,11 @@ jobs:
 
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
+        versionhawk https://github.com/andrewalevin/expedatetimemint/
         echo "VERSION=$(versionhawk https://github.com/andrewalevin/expedatetimemint/)" >> $GITHUB_ENV
         echo ""
         echo "🔢 Version=${VERSION}"
+        echo "🔢 Version=${{ env.VERSION }}"
         
     - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
