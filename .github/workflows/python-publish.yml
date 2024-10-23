@@ -52,6 +52,7 @@ jobs:
         echo "🔢 Version2=${{ env.VERSION2 }}"
         echo "VERSION=$VERSION2" >> $GITHUB_ENV
         echo "VERSION=${VERSION2}" >> $GITHUB_ENV
+        echo "VERSION=${{ env.VERSION2 }}" >> $GITHUB_ENV
         echo ""
         echo "🔢 Version=$VERSION"
         echo "🔢 Version=${VERSION}"
