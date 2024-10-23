@@ -39,9 +39,9 @@ jobs:
     - name: 🔵 Get 🦅 VersionHawk
       run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
 
-    - name: 🍐 Get current date and time Version
-      id: get_datetime
-      run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+    #- name: 🍐 Get current date and time Version
+    #  id: get_datetime
+    #  run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
     - name: 🟠 Check 🦅 VersionHawk
       run: |
