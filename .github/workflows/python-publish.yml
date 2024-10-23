@@ -99,7 +99,6 @@ jobs:
 
     - name: 🍒 Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
-        
 
     - name: 🥭 Build and push
       uses: docker/build-push-action@v6
@@ -108,8 +107,10 @@ jobs:
         tags: |
             ${{ env.DOCKER_NAME_PREFIX_TAG }}:${{ env.VERSION }}
             ${{ env.DOCKER_NAME_PREFIX_TAG }}:latest
+        platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
             
         
+
 
 
 
