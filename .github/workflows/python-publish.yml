@@ -41,7 +41,8 @@ jobs:
     #    sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
     - name: 🔵 Get 🦅 VersionHawk
-      run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+      run: |
+        echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
       
     - name: 🟠 Check 🦅 VersionHawk
       run: |
