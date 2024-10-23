@@ -16,9 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: expedatetimemint
+      GITHUB_USERNAME: andrewalevin
+      GITHUB_REPO_NAME: expedatetimemint
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYPI_PROJECT_NAME: expedatetimemint
       PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
       DOCKERHUB_USERNAME: andrewlevin
+      DOCKERHUB_PROJECT_NAME: expedatetimemint
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       
     steps:
@@ -41,7 +45,7 @@ jobs:
 
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
-        echo "VERSION=$(versionhawk ${PROJECT_NAME})" >> $GITHUB_ENV
+        echo "VERSION=$(versionhawk https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/)" >> $GITHUB_ENV
       
     - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
@@ -83,8 +87,8 @@ jobs:
       with:
         push: true
         tags: |
-            ${{ env.DOCKERHUB_USERNAME }}/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
-            ${{ env.DOCKERHUB_USERNAME }}/${{ env.PROJECT_NAME }}:latest
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_PROJECT_NAME }}:${{ env.VERSION }}
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_PROJECT_NAME }}:latest
         platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
             
         
