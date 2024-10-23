@@ -51,6 +51,10 @@ jobs:
       run: |
         sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
+    - name: 🗂 Cat pyproject.toml
+      run: |
+        cat pyproject.toml
+
     - name: 🐍 ⬇️ Python. Install dependencies
       run: pip install build
 
