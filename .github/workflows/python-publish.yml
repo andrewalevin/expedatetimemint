@@ -18,89 +18,62 @@ jobs:
       DOCKERHUB_USERNAME: andrewlevin
       PROJECT_NAME: expedatetimemint
     steps:
-    - name: Print start message
-      run: echo "Starting the GitHub Action workflow for Python package upload..."
-
-    - name: Checkout repository
+    - name: 🍊 Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Python environment
+    - name: 🍋 Set up Python environment
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
 
-    - name: 🟢 Install 🦅 VersionHawk
-      run: |
-        echo "Install 🦅 VersionHawk..."
-        python -m pip install --upgrade pip
-        pip install versionhawk
-        echo "Version <-"
-        
-    - name: 🔵 Get 🦅 VersionHawk
-      run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+    - name: 🐍 🔄 PyPI Upgrade
+      run: python -m pip install --upgrade pip
 
-    #- name: 🍐 Get current date and time Version
-    #  id: get_datetime
+    - name: 🐍 ⬇️ 🦅 PyPI. VersionHawk Install
+      run: pip install versionhawk
+
+    #- name: 🔢 🕰️ Version DateTimeStamp
     #  run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
-    - name: 🟠 Check 🦅 VersionHawk
+    - name: 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
       run: |
-          echo "🟠 The value of VERSION is $VERSION"
+        echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+        sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
-    - name: 🟣 Sed
-      run: |
-          sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
+    - name: 🐍 ⬇️ Python. Install dependencies
+      run: pip install build
 
-    - name: 🟡 Cat
-      run: |
-          cat pyproject.toml
+    - name: 🐍 🏗️ Python. Build package
+      run: python -m build
 
-
-    - name: 🍏 Install dependencies
-      run: |
-        echo "Installing necessary dependencies..."
-        python -m pip install --upgrade pip
-        pip install build
-
-    - name: 🍎 Build package
-      run: |
-        echo "Building the Python package..."
-        python -m build
-
-    - name: 🍊 Create GitHub Release
+    - name: 😺 💾 🚀 Github. Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ env.VERSION }}  # Используем переменную VERSION как тег
-        release_name: "${{ env.VERSION }}"  # Название релиза
+        tag_name: ${{ env.VERSION }}
+        release_name: ${{ env.VERSION }}
         draft: false
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 🍋 Publish package
+    - name: 🐍 💾 🚀 Python PyPI. Publish package
       if: steps.create_release.outputs.upload_url != ''
       uses: pypa/gh-action-pypi-publish@v1.8.6
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-
-    - name: 🍟 Echo
-      run: echo "DOCKER_NAME_PREFIX_TAG=$(echo "$DOCKERHUB_USERNAME/$PROJECT_NAME")" >> $GITHUB_ENV  
-    
-    - name: 🍟🍟 Echo
-      run: echo "$DOCKER_NAME_PREFIX_TAG"
   
-    - name: 🍓 Login to Docker Hub
+    - name: 🐳 🔑 Docker. Login to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: 🍒 Set up Docker Buildx
+    - name: 🐳 🏗️ Docker. Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: 🥭 Build and push
+    - name: 🐳 💾 🚀 Docker. Build and push
       uses: docker/build-push-action@v6
       with:
         push: true
@@ -110,6 +83,7 @@ jobs:
         platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
             
         
+
 
 
 
