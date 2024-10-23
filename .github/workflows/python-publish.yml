@@ -37,7 +37,7 @@ jobs:
         echo "Version <-"
         
     - name: 🔵 Get 🦅 VersionHawk
-      run: echo "VERSION=$(versionhawk ${vars.PROJECT_NAME})" >> $GITHUB_ENV
+      run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
 
     - name: 🟠 Check 🦅 VersionHawk
       run: |
@@ -94,6 +94,9 @@ jobs:
     - name: 🍒 Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
         
+    - name: 🍟 Echo
+      run: echo ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.PROJECT_NAME }}:${{ env.VERSION }}
+    
     - name: 🥭 Build and push
       uses: docker/build-push-action@v6
       with:
