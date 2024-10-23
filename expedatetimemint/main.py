@@ -2,8 +2,12 @@ import time
 import random
 from datetime import datetime
 from importlib.metadata import version, PackageNotFoundError
+import logging
 
-# Список эмодзи фруктов и овощей
+# Set up basic configuration
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
 emojis = [
     '🍎', '🍌', '🍇', '🍉', '🍓', '🥑', '🍍', '🍑', '🥕', '🍆', '🍒', '🍋',
     '🍅', '🥒', '🍏', '🍊', '🍈', '🥥', '🥝', '🍐', '🍠', '🥭', '🍋', '🥦',
@@ -22,12 +26,12 @@ def show_time_with_emoji():
     while True:
         emoji = random.choice(emojis)
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print(f"{emoji} {current_time} - {package_name} version: {pkg_version}")
+        logging.info(f"{emoji} {current_time} - {package_name} version: {pkg_version}")
         time.sleep(1)
 
 
 def main():
-    print('🚀 Started main(): ')
+    logging.info('🚀 Started main(): ')
     show_time_with_emoji()
 
 
