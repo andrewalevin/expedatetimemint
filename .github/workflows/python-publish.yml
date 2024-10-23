@@ -3,7 +3,7 @@ name: Upload and Release Python Package
 on:
   push:
     branches:
-      - main  # Укажите нужную ветку для создания релиза и загрузки на PyPi
+      - main
   release:
     types: [published]
 
@@ -105,8 +105,8 @@ jobs:
       with:
         push: true
         tags: |
-            ${{ env.DOCKER_NAME_PREFIX_TAG }}:${{ env.VERSION }}
-            ${{ env.DOCKER_NAME_PREFIX_TAG }}:latest
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.PROJECT_NAME }}:${{ env.VERSION }}
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.PROJECT_NAME }}:latest
         platforms: linux/arm64,linux/amd64,linux/386,linux/arm/v7
             
         
