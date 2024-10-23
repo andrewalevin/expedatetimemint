@@ -92,7 +92,7 @@ jobs:
     - name: 🍓 Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: $DOCKERHUB_USERNAME
+        username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: 🍒 Set up Docker Buildx
