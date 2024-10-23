@@ -22,9 +22,14 @@ def show_time_with_emoji():
     while True:
         emoji = random.choice(emojis)
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print(f"{emoji} {current_time} - {package_name} v{pkg_version}")
+        print(f"{emoji} {current_time} - {package_name} version: {pkg_version}")
         time.sleep(1)
 
 
-if __name__ == "__main__":
+def main():
+    print('🚀 Started main(): ')
     show_time_with_emoji()
+
+
+if __name__ == "__main__":
+    main()

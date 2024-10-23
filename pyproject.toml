@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [project.scripts]
-expedatetimemint = "expedatetimemint.main:show_time_with_emoji"
+expedatetimemint = "expedatetimemint.main:main"
 
 [project.optional-dependencies]
 dev = ["pytest", "flake8"]

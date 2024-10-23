@@ -1,6 +1,6 @@
 
 services:
   expedatetimemint:
-    image: andrewlevin/expedatetimemint:0.1
+    image: andrewlevin/expedatetimemint:latest
     restart: on-failure:3
 
