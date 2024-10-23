@@ -40,22 +40,19 @@ jobs:
     #    echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
     #    sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
-    - name: 🔵 Get 🦅 VersionHawk
-      run: |
-        echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+    #- name: 🔵 Get 🦅 VersionHawk
+    #  run: |
+    #    echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
       
-    - name: 🟠 Check 🦅 VersionHawk
-      run: |
-          echo "🟠 The value of VERSION is $VERSION"
+    #- name: 🟠 Check 🦅 VersionHawk
+    #  run: |
+    #      echo "🟠 The value of VERSION is $VERSION"
 
     - name: 🟣 Sed
       run: |
-          sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
+        echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+        sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
 
-    - name: 🟡 Cat
-      run: |
-          cat pyproject.toml
-    
     - name: DEV 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
       run: |
         echo "🔫 Version 🔫 : ${{ env.VERSION }}"
