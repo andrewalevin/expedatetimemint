@@ -39,6 +39,11 @@ jobs:
       run: |
         echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
         sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
+    
+    - name: DEV 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
+      run: |
+        echo "🔫 Version 🔫 : $VERSION"
+        cat pyproject.toml
 
     - name: 🐍 ⬇️ Python. Install dependencies
       run: pip install build
