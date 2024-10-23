@@ -38,7 +38,7 @@ jobs:
     - name: 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
       run: |
         echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
-        sed -i "s/PROJECT_VERSION/$VERSION/g" pyproject.toml
+        sed -i "s/PROJECT_VERSION/${VERSION}/g" pyproject.toml
     
     - name: DEV 🐍 📦 🔫 🔢 🦅 VersionHawk New version to PROJECT.TOML
       run: |
