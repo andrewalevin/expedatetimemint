@@ -39,6 +39,10 @@ jobs:
     - name: 🔵 Get 🦅 VersionHawk
       run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
 
+    - name: 🍐 Get current date and time Version
+      id: get_datetime
+      run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+
     - name: 🟠 Check 🦅 VersionHawk
       run: |
           echo "🟠 The value of VERSION is $VERSION"
@@ -62,10 +66,6 @@ jobs:
       run: |
         echo "Building the Python package..."
         python -m build
-
-    - name: 🍐 Get current date and time
-      id: get_datetime
-      run: echo "::set-output name=tag::v$(date +'%Y%m%d-%H%M%S')"
 
     - name: 🍊 Create GitHub Release
       id: create_release
