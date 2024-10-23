@@ -46,8 +46,14 @@ jobs:
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
         versionhawk https://github.com/andrewalevin/expedatetimemint/
+        VERSION2=$(versionhawk https://github.com/andrewalevin/expedatetimemint/)
+        echo "🔢 Version2=$VERSION2"
+        echo "🔢 Version2=${VERSION2}"
+        echo "🔢 Version2=${{ env.VERSION2 }}"
+        
         echo "VERSION=$(versionhawk https://github.com/andrewalevin/expedatetimemint/)" >> $GITHUB_ENV
         echo ""
+        echo "🔢 Version=$VERSION"
         echo "🔢 Version=${VERSION}"
         echo "🔢 Version=${{ env.VERSION }}"
         
