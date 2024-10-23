@@ -45,7 +45,7 @@ jobs:
         
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
-        echo "VERSION=$(versionhawk ${PYPI_PROJECT_NAME})" >> $GITHUB_ENV
+        echo "VERSION=$(versionhawk ${GITHUB_USERNAME}/${GITHUB_REPO_NAME})" >> $GITHUB_ENV
       
     - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
