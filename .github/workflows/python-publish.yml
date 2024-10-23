@@ -41,7 +41,7 @@ jobs:
 
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
-        echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+        echo "VERSION=$(versionhawk ${PROJECT_NAME})" >> $GITHUB_ENV
       
     - name: 🔫 🔢  Sed Version to PROJECT.TOML
       run: |
