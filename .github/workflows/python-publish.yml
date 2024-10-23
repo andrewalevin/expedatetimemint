@@ -14,7 +14,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      DOCKERHUB_USERNAME: "andrewlevin"
+      PROJECT_NAME: "expedatetimemint"
     steps:
     - name: Print start message
       run: echo "Starting the GitHub Action workflow for Python package upload..."
@@ -35,7 +37,7 @@ jobs:
         echo "Version <-"
         
     - name: 🔵 Get 🦅 VersionHawk
-      run: echo "VERSION=$(versionhawk expedatetimemint)" >> $GITHUB_ENV
+      run: echo "VERSION=$(versionhawk ${{ vars.PROJECT_NAME }})" >> $GITHUB_ENV
 
     - name: 🟠 Check 🦅 VersionHawk
       run: |
@@ -50,22 +52,22 @@ jobs:
           cat pyproject.toml
 
 
-    - name: Install dependencies
+    - name: 🍏 Install dependencies
       run: |
         echo "Installing necessary dependencies..."
         python -m pip install --upgrade pip
         pip install build
 
-    - name: Build package
+    - name: 🍎 Build package
       run: |
         echo "Building the Python package..."
         python -m build
 
-    - name: Get current date and time
+    - name: 🍐 Get current date and time
       id: get_datetime
       run: echo "::set-output name=tag::v$(date +'%Y%m%d-%H%M%S')"
 
-    - name: Create GitHub Release
+    - name: 🍊 Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
       with:
@@ -76,9 +78,32 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish package
+    - name: 🍋 Publish package
       if: steps.create_release.outputs.upload_url != ''
       uses: pypa/gh-action-pypi-publish@v1.8.6
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+    
+    - name: 🍓 Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: 🍒 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+        
+    - name: 🥭 Build and push
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.PROJECT_NAME }}:${{ env.VERSION }}
+
+
+
+
+
+
+
+      
