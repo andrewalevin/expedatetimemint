@@ -45,7 +45,7 @@ jobs:
 
     - name: 🦅 🔢 VersionHawk. Get a New version
       run: |
-        echo "VERSION=$(versionhawk https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/)" >> $GITHUB_ENV
+        echo "VERSION=$(versionhawk https://github.com/${{ env.GITHUB_USERNAME }}/${{ env.GITHUB_REPO_NAME }}/)" >> $GITHUB_ENV
         echo ""
         echo "🔢 Version=${VERSION}"
         
