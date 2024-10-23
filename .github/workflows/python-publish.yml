@@ -1,4 +1,4 @@
-name: Upload and Release Python Package
+name: 🍒 Upload and Release Python Package
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
     - name: 🐍 ⬇️ 🦅 PyPI. VersionHawk Install
       run: pip install versionhawk
 
-    #- name: 🔢 🕰️ Version DateTimeStamp
+    #- name: 🕰️ 🔢 Version DateTimeStamp
     #  run: echo "VERSION=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
     - name: 🦅 🔢 VersionHawk. Get a New version
